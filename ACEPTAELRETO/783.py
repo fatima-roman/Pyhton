@@ -1,28 +1,27 @@
-tiempo = []
-solucion ={}
+solucion = []
 
-nProblemas, tiempoEstimado = map(int, (input().split()))
-
-
-while nProblemas != 0 and tiempoEstimado != 0:
-    print(nProblemas, tiempoEstimado)
-    for i in range(nProblemas):
-        tiempo = list(map(int, input().split()))
-    tiempo.sort()
-
-    for i in tiempo:
-        tiempoAcumulado = 0
-        problemasResueltos = 0
-        penalizacion = 0
-
-        if tiempoAcumulado + i <= tiempoEstimado:
-            tiempoAcumulado += i
+while True:
+    nProblemas, tiempoEstimado = map(int, input().split())
+    
+    if nProblemas == 0 and tiempoEstimado == 0:
+        break
+    
+    tiempos = list(map(int, input().split()))
+    tiempos.sort()  
+    
+    tiempoAcumulado = 0
+    problemasResueltos = 0
+    penalizacion = 0
+    
+    for tiempo in tiempos:
+        if tiempoAcumulado + tiempo <= tiempoEstimado:
+            tiempoAcumulado += tiempo
             problemasResueltos += 1
             penalizacion += tiempoAcumulado
         else:
             break
-    solucion[nProblemas] = penalizacion
-    print(solucion)
-    nProblemas, tiempoEstimado = map(int, (input().split()))
+    
+    solucion.append((problemasResueltos, penalizacion))
 
-print(solucion.items())
+for result in solucion:
+    print(result[0], result[1])
